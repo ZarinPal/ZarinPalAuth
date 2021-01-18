@@ -1,0 +1,3 @@
+include ':auth'
+include ':app'
+rootProject.name = "zarinpal-auth"

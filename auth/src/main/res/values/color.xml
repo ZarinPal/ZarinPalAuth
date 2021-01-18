@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <color name="zp_color_green">#FF00B894</color>
+    <color name="zp_color_red">#FFD63031</color>
+    <color name="zp_color_gray">#FF636372</color>
+
+
+    <color name="badge_color">#FFF5F5F8</color>
+    <color name="icon_color">@color/zp_color_gray</color>
+    <color name="content_color">#FF08080D</color>
+    <color name="sub_content_color">#FF636372</color>
+    <color name="back_color">#FF636372</color>
+    <color name="divider_color">#FF636372</color>
+
+
+    <color name="content_color_dark">#f7f7f2</color>
+    <color name="sub_content_color_dark">#5E5E5E</color>
+    <color name="badge_color_dark">#0a0a07</color>
+    <color name="icon_color_dark">@android:color/background_light</color>
+    <color name="back_color_dark">@android:color/background_light</color>
+    <color name="zp_color_gray_dark">@android:color/background_light</color>
+    <color name="divider_color_dark">@android:color/background_light</color>
+
+
+    <color name="backgroundColorLight">@android:color/background_light</color>
+    <color name="backgroundColorDark">#141517</color>
+
+    <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">#0044AA</color>
+
+
+
+</resources>

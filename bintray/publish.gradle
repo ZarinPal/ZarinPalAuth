@@ -1,0 +1,47 @@
+apply plugin: 'maven'
+apply plugin: 'maven-publish'
+apply plugin: 'com.jfrog.bintray'
+
+
+
+def libraryGroupId = 'com.zarinpal'
+def libraryArtifactId = 'auth'
+def libraryVersion = '0.0.1'
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+                groupId = libraryGroupId
+                artifactId = libraryArtifactId
+                version = libraryVersion
+            }
+        }
+    }
+}
+
+bintray {
+    Properties properties = new Properties()
+    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+    def token = properties["bintray_token"]
+    def id = properties["bintray_user"]
+    user id
+    key token
+    publications = ['release']
+    publish = true
+    override = true
+    pkg {
+        userOrg = "zarinpali"
+        repo = 'ZarinPalAuth'
+        name = libraryArtifactId
+        desc = 'ZarinPal Auth SDK'
+        licenses = ['Apache-2.0']
+        vcsUrl = 'https://github.com/ZarinPal/ZarinPalAuth.git'
+        publicDownloadNumbers = true
+        version {
+            name = libraryVersion
+            released = new Date()
+        }
+    }
+}
