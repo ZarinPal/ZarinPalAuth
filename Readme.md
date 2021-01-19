@@ -11,3 +11,24 @@ dependencies {
 }
 ```
 ZarinPal Auth ables appears login screen as `BottomSheet` or `Sheet` on Your app.
+
+# Sample :
+
+```kotlin
+  ZarinPalAuth.with(this)
+            .byRequest(Request.asPasswordGrant(GRANT_TYPE, CLIENT_SECRET, CLIENT_ID, SCOPE))
+            .asBottomSheet()
+            .setMessage("Message")
+            .make()
+            .start(object : ZarinPalAuth.Callback {
+                override fun onIssueAccessToken(
+                    typeToken: String?, accessToken: String?, refreshToken: String?, expireIn: Long
+                ) {
+                    Log.i("TAG", accessToken)
+                }
+
+                override fun onException(throwable: Throwable?) {
+
+                }
+            })
+```
