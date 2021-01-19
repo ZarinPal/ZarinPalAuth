@@ -1,34 +1,50 @@
-apply plugin: 'maven'
-apply plugin: 'maven-publish'
 apply plugin: 'com.jfrog.bintray'
-
-
+apply plugin: 'com.github.dcendents.android-maven'
 
 def libraryGroupId = 'com.zarinpal'
 def libraryArtifactId = 'auth'
 def libraryVersion = '0.0.1'
 
-afterEvaluate {
-    publishing {
-        publications {
-            release(MavenPublication) {
-                from components.release
-                groupId = libraryGroupId
-                artifactId = libraryArtifactId
-                version = libraryVersion
-            }
-        }
-    }
+version = libraryVersion
+group = libraryGroupId
+
+
+task generateSourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier 'sources'
 }
+
+task generateJavadocs(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath()
+            .join(File.pathSeparator))
+}
+
+task generateJavadocsJar(type: Jar) {
+    from generateJavadocs.destinationDir
+    classifier 'javadoc'
+}
+
+
+artifacts {
+    archives generateJavadocsJar
+    archives generateSourcesJar
+}
+
+generateJavadocsJar.dependsOn generateJavadocs
+
+tasks.withType(Javadoc).all {
+    enabled = false
+}
+
 
 bintray {
     Properties properties = new Properties()
     properties.load(project.rootProject.file('local.properties').newDataInputStream())
     def token = properties["bintray_token"]
     def id = properties["bintray_user"]
-    user id
-    key token
-    publications = ['release']
+    user = id
+    key = token
     publish = true
     override = true
     pkg {
@@ -44,4 +60,7 @@ bintray {
             released = new Date()
         }
     }
+    configurations = ['archives']
 }
+
+

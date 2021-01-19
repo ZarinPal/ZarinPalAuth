@@ -5,17 +5,18 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.zarinpal.Request
 import com.zarinpal.ZarinPalAuth
+import com.zarinpal.builder.ZarinPalAuthPresentation
+
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val CLIENT_ID = "3"
-        val CLIENT_SECRET = "BjHEBKZu3X3n2h6oeCwyq7uem5dces7hmKSTRwiC"
-        val GRANT_TYPE = "password"
-        val SCOPE = "*"
-
+        val CLIENT_ID = ""
+        val CLIENT_SECRET = ""
+        val GRANT_TYPE = ""
+        val SCOPE = ""
 
 
 
@@ -23,14 +24,11 @@ class MainActivity : AppCompatActivity() {
         ZarinPalAuth.with(this)
             .byRequest(Request.asPasswordGrant(GRANT_TYPE, CLIENT_SECRET, CLIENT_ID, SCOPE))
             .asBottomSheet()
-            .setMessage("من دارم میام")
+            .setMessage("Message")
             .make()
             .start(object : ZarinPalAuth.Callback {
                 override fun onIssueAccessToken(
-                    typeToken: String?,
-                    accessToken: String?,
-                    refreshToken: String?,
-                    expireIn: Long
+                    typeToken: String?, accessToken: String?, refreshToken: String?, expireIn: Long
                 ) {
                     Log.i("TAG", accessToken)
                 }
