@@ -1,11 +1,12 @@
 apply plugin: 'com.jfrog.bintray'
 apply plugin: 'com.github.dcendents.android-maven'
 
+
+
 def libraryGroupId = 'com.zarinpal'
 def libraryArtifactId = 'auth'
-def libraryVersion = '0.0.1'
 
-version = libraryVersion
+version = artifactVersion
 group = libraryGroupId
 
 
@@ -46,7 +47,7 @@ bintray {
     user = id
     key = token
     publish = true
-    override = true
+//    override = true
     pkg {
         userOrg = "zarinpali"
         repo = 'ZarinPalAuth'
@@ -56,7 +57,7 @@ bintray {
         vcsUrl = 'https://github.com/ZarinPal/ZarinPalAuth.git'
         publicDownloadNumbers = true
         version {
-            name = libraryVersion
+            name = artifactVersion
             released = new Date()
         }
     }

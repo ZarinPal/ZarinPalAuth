@@ -1,0 +1,23 @@
+ext {
+
+    artifactVersion = "0.0.1-alpha2"
+
+    library = [
+            'appcompat'   : '1.2.0',
+            'constraint'  : '2.0.4',
+            'zarinpalCore': '0.1.23-beta',
+            'coroutines'  : '1.4.2',
+            'material'    : '1.2.1',
+            'pinview'     : '1.4.4',
+            'ktx'         : '1.3.2'
+    ]
+
+    plugin = [
+            'kotlin' : '1.3.71',
+            'gradle' : '4.1.1',
+            'bintray': '1.2',
+            'maven'  : '1.4.1',
+    ]
+
+
+}
