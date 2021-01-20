@@ -4,9 +4,12 @@ import android.content.Context
 import android.os.CountDownTimer
 import android.util.Patterns
 import android.widget.Toast
-import com.zarinpal.auth.controller.HttpException
+import com.zarinpal.auth.exception.HttpException
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import org.json.JSONArray
 import org.json.JSONObject
+import kotlin.coroutines.CoroutineContext
 
 internal fun runCountDownTimer(
     milliInFuture: Long,
@@ -39,9 +42,15 @@ internal fun String.isValidEmail(): Boolean {
 
 internal fun JSONArray.first(): JSONObject = this.getJSONObject(0)
 internal val errorMap =
-    mapOf("REST_USER_NOT_FOUND" to "کاربر یافت نشد.", "INVALID_GRANT" to "رمز وارد شده اشتباه است.")
+    mapOf(
+        HttpException.USER_NOT_FOUND to "کاربر یافت نشد.",
+        HttpException.INVALID_GRANT to "رمز وارد شده اشتباه است."
+    )
 
-internal fun Throwable.toToast(context: Context): Toast {
+internal fun Throwable.toToast(
+    context: Context,
+    action: ((readableCode: String) -> Unit)? = null
+): Toast {
     if (this !is HttpException) {
         return Toast.makeText(context, message, Toast.LENGTH_SHORT)
     }
@@ -52,7 +61,14 @@ internal fun Throwable.toToast(context: Context): Toast {
         .getString("readable_code")
 
 
+    action?.invoke(readable)
+
     return Toast.makeText(context, errorMap[readable], Toast.LENGTH_SHORT)
-
-
 }
+
+internal fun newScope(context: CoroutineContext = Dispatchers.IO) = CoroutineScope(context)
+
+internal fun <T> mutableSingleLiveEvent(block: SingleLiveEvent<T>.() -> Unit): SingleLiveEvent<T> {
+    return SingleLiveEvent<T>().apply { block(this) }
+}
+

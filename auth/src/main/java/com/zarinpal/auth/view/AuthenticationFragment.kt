@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatImageView
 import com.zarinpal.auth.Holder
 import com.zarinpal.auth.R
+import com.zarinpal.auth.view.login.InitializerFragment
 import com.zarinpal.provider.view.bottomSheets.BaseBottomSheet
 
 
@@ -26,7 +27,7 @@ internal class AuthenticationFragment : BaseBottomSheet() {
             .commitAllowingStateLoss()
     }
 
-    override fun getLayout(viewGroup: ViewGroup?) = R.layout.native_auth_bottosheet
+    override fun getLayout(viewGroup: ViewGroup?) = R.layout.master_auth_bottosheet
 
 }
 

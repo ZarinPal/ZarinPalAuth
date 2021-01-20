@@ -5,5 +5,6 @@ internal class APIs {
         private const val END_POINT = "https://next.zarinpal.com"
         const val INITIALIZER = "$END_POINT/api/oauth/initialize"
         const val ISSUE_TOKEN = "$END_POINT/api/oauth/token"
+        const val REGISTER = "$END_POINT/api/oauth/register"
     }
 }
