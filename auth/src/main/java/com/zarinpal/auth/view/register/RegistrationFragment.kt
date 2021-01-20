@@ -18,6 +18,7 @@ import com.zarinpal.provider.core.ViewPumper
 import com.zarinpal.provider.core.toTypeface
 
 internal class RegistrationFragment : Fragment(R.layout.registration_auth_fragment) {
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         ViewPumper.pump(view, Font.Light)

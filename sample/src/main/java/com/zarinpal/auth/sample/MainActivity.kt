@@ -5,10 +5,10 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.zarinpal.Request
 import com.zarinpal.ZarinPalAuth
-import com.zarinpal.builder.ZarinPalAuthPresentation
 
 
 class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -17,9 +17,6 @@ class MainActivity : AppCompatActivity() {
         val CLIENT_SECRET = ""
         val GRANT_TYPE = ""
         val SCOPE = ""
-
-
-
 
         ZarinPalAuth.with(this)
             .byRequest(Request.asPasswordGrant(GRANT_TYPE, CLIENT_SECRET, CLIENT_ID, SCOPE))
@@ -58,4 +55,5 @@ class MainActivity : AppCompatActivity() {
 //
 //            })
     }
+
 }

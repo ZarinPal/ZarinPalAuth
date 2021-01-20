@@ -1,6 +1,5 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -10,14 +9,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="رمز یک‌بار مصرف به %s ارسال شد."
+        android:text="@string/zarinpal_auth_sdk_otp_sent"
         android:textColor="@android:color/black"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-    </TextView>
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <com.chaos.view.PinView
@@ -36,10 +33,10 @@
         app:itemRadius="4dp"
         app:itemSpacing="10dp"
         app:itemWidth="48dp"
-        app:lineColor="@color/mtrl_textinput_default_box_stroke_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_time"
+        app:lineColor="@color/mtrl_textinput_default_box_stroke_color"
         app:lineWidth="2dp"
         app:viewType="rectangle" />
 
@@ -63,9 +60,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:background="@drawable/btn"
-        android:text="تایید"
+        android:text="@string/zarinpal_auth_sdk__accept"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/pin_view" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
