@@ -18,6 +18,7 @@ public class ZarinPalAuthPresentation {
     public void start(@NonNull ZarinPalAuth.Callback callback) {
         Holder.INSTANCE.setCallback(callback);
         Holder.INSTANCE.setDrawable(builder.getIcon());
+        Holder.INSTANCE.setAuthClient(builder.getAuthType().toSerialiaze());
         builder.getAppearance().appear(builder.getFragmentManager(), getBundle());
     }
 
@@ -27,7 +28,6 @@ public class ZarinPalAuthPresentation {
         bundle.putInt("night_mode", builder.getNightMode());
         bundle.putInt("style", builder.getStyleableRes());
         bundle.putString("message", builder.getMessage());
-        bundle.putString("auth_client", builder.getAuthType().toSerialiaze());
         return bundle;
 
 

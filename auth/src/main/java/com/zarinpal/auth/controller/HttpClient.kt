@@ -1,5 +1,6 @@
 package com.zarinpal.auth.controller
 
+import com.zarinpal.auth.exception.HttpException
 import org.json.JSONObject
 import java.io.OutputStreamWriter
 import java.io.UnsupportedEncodingException

@@ -1,40 +1,33 @@
-package com.zarinpal.auth.view
+package com.zarinpal.auth.view.login
 
-import android.graphics.Bitmap
 import android.os.Bundle
-import android.util.Patterns
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
-import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import com.zarinpal.auth.Holder
 import com.zarinpal.auth.R
-import com.zarinpal.auth.controller.InitializerHttpClient
+import com.zarinpal.auth.exception.HttpException
+import com.zarinpal.auth.midleware.InitializerMiddleware
 import com.zarinpal.auth.tools.isValidEmail
 import com.zarinpal.auth.tools.isValidPhoneNumber
 import com.zarinpal.auth.tools.toToast
+import com.zarinpal.auth.view.register.RegistrationFragment
 import com.zarinpal.provider.core.ButtonProgress
 import com.zarinpal.provider.core.Font
 import com.zarinpal.provider.core.ViewPumper
 import com.zarinpal.provider.core.toTypeface
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import org.json.JSONObject
 
-class InitializerFragment : Fragment(R.layout.init_auth_fragment) {
+internal class InitializerFragment : Fragment(R.layout.init_auth_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         ViewPumper.pump(view, Font.Light)
         super.onViewCreated(view, savedInstanceState)
-        val scope = CoroutineScope(Dispatchers.IO)
 
         val appName = arguments?.getString("app_name")
         val message = arguments?.getString("message")
-        val authClient = arguments?.getString("auth_client")
 
 
         val edtUsername = view.findViewById<EditText>(R.id.edt_username)
@@ -87,31 +80,39 @@ class InitializerFragment : Fragment(R.layout.init_auth_fragment) {
 
 
                 btn.progressVisibility = true
-                scope.launch {
-                    runCatching {
-                        InitializerHttpClient(this@apply).fetch()
-                    }.fold({
-                        btn.progressVisibility = false
-                        withContext(Dispatchers.Main) {
-                            requireFragmentManager()
-                                .beginTransaction()
-                                .replace(R.id.fragment, PasswordFragment().apply {
-                                    arguments = bundleOf(
-                                        "username" to edtUsername.text.toString(),
-                                        "auth_client" to authClient,
-                                        "params" to it.body
-                                    )
-                                }).commitAllowingStateLoss()
-                        }
-                    }, {
-                        withContext(Dispatchers.Main) {
-                            btn.progressVisibility = false
-                            it.toToast(requireContext()).show()
-                            Holder.callback?.onException(it)
-                        }
-                    })
+                InitializerMiddleware(this)
+                    .asLiveData()
+                    .observe(this@InitializerFragment, Observer {
 
-                }
+                    btn.progressVisibility = false
+                    val response = it.getOrElse {
+                        it.toToast(requireContext()) {
+                            if (it == HttpException.USER_NOT_FOUND) {
+                                requireFragmentManager()
+                                    .beginTransaction()
+                                    .replace(R.id.fragment, RegistrationFragment().apply {
+                                        arguments =
+                                            bundleOf("username" to edtUsername.text.toString())
+                                    })
+                                    .commitAllowingStateLoss()
+                            }
+                        }.show()
+                        Holder.callback?.onException(it)
+                        return@Observer
+                    }
+
+                    requireFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment, OtpFragment()
+                            .apply {
+                                arguments = bundleOf(
+                                    "username" to edtUsername.text.toString(),
+                                    "params" to response.body
+                                )
+                            }).commitAllowingStateLoss()
+
+                })
+
             }
         }
     }

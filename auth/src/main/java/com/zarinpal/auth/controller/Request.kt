@@ -15,12 +15,6 @@ data class Response(
     val request: Request
 )
 
-data class HttpException(
-    override val message: String,
-    val statusCode: Int,
-    val response: Response
-) : Exception(message)
-
 enum class ContentType(val entry: Pair<String, String>) {
     ApplicationJson(Pair("Content-Type", "application/json")),
     ApplicationFormUrlEncoded(Pair("Content-Type", "application/x-www-form-urlencoded"))
