@@ -42,19 +42,20 @@ android {
     }
 }
 
-
 dependencies {
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.3.2'
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation "androidx.constraintlayout:constraintlayout:2.0.4"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$plugin.kotlin"
+    implementation "androidx.appcompat:appcompat:$library.appcompat"
+    implementation "androidx.constraintlayout:constraintlayout:$library.constraint"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$library.coroutines"
+    implementation "com.google.android.material:material:$library.material"
+    implementation "com.chaos.view:pinview:$library.pinview"
+    implementation "androidx.core:core-ktx:$library.ktx"
 
-    api 'com.zarinpal:core:0.1.23-beta'
-    implementation 'com.chaos.view:pinview:1.4.4'
 
-    implementation('org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.2')
-    implementation 'com.google.android.material:material:1.2.1'
+
+    api "com.zarinpal:core:$library.zarinpalCore"
+
 
 }
 
