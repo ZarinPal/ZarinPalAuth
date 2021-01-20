@@ -15,7 +15,9 @@ public class ZarinPalAuth {
 
 
     public static ContextBuilder with(Context context) {
-        return new ContextBuilder(context);
+        synchronized (ZarinPalAuth.class) {
+            return new ContextBuilder(context);
+        }
     }
 
 
