@@ -12,7 +12,7 @@ dependencies {
 }
 ```
 
-To get the latest version click [Here]("https://github.com/ZarinPal/ZarinPalAuth/releases")!
+To get the latest version click [Here](https://github.com/ZarinPal/ZarinPalAuth/releases)!
 
 
 # Sample :
