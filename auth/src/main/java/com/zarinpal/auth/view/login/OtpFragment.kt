@@ -26,6 +26,7 @@ import org.json.JSONObject
 import java.util.concurrent.TimeUnit
 
 internal class OtpFragment : Fragment(R.layout.otp_auth_fragment) {
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         ViewPumper.pump(view, Font.Light)
@@ -51,12 +52,11 @@ internal class OtpFragment : Fragment(R.layout.otp_auth_fragment) {
                 )
 
                 this@apply.text = String.format(
-                    "تا %s ارسال مجدد رمز‌یکبار مصرف به شما امکان پذیر است.",
+                    context.getString(R.string.zarinpal_auth_sdk_resend_code_time),
                     remainTime
                 )
             }
         }
-
 
         view.findViewById<ButtonProgress>(R.id.btn).apply {
             setOnClickListener {
@@ -95,5 +95,5 @@ internal class OtpFragment : Fragment(R.layout.otp_auth_fragment) {
             }
         }
     }
-}
 
+}

@@ -22,6 +22,7 @@ import com.zarinpal.provider.core.ViewPumper
 import com.zarinpal.provider.core.toTypeface
 
 internal class InitializerFragment : Fragment(R.layout.init_auth_fragment) {
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         ViewPumper.pump(view, Font.Light)
         super.onViewCreated(view, savedInstanceState)
@@ -52,7 +53,7 @@ internal class InitializerFragment : Fragment(R.layout.init_auth_fragment) {
                 if (this.isEmpty()) {
                     Toast.makeText(
                         requireContext(),
-                        "ایمیل یا شماره همراه وارد نمایید.",
+                        getString(R.string.zarinpal_auth_sdk_enter_email_or_phone_number),
                         Toast.LENGTH_SHORT
                     ).show()
                     return@setOnClickListener
@@ -63,7 +64,7 @@ internal class InitializerFragment : Fragment(R.layout.init_auth_fragment) {
                 if (this.matches("\\d+".toRegex()) && !this.isValidPhoneNumber()) {
                     Toast.makeText(
                         requireContext(),
-                        "شماره همراه وارد شده اشتباه است.",
+                        getString(R.string.zarinpal_auth_sdk_wrong_entered_phone_number),
                         Toast.LENGTH_SHORT
                     ).show()
                     return@setOnClickListener
@@ -72,7 +73,7 @@ internal class InitializerFragment : Fragment(R.layout.init_auth_fragment) {
                 if (!this.matches("\\d+".toRegex()) && !this.isValidEmail()) {
                     Toast.makeText(
                         requireContext(),
-                        "ایمیل وارد شده اشتباه است.",
+                        getString(R.string.zarinpal_auth_sdk_wrong_entered_email),
                         Toast.LENGTH_SHORT
                     ).show()
                     return@setOnClickListener
@@ -116,5 +117,5 @@ internal class InitializerFragment : Fragment(R.layout.init_auth_fragment) {
             }
         }
     }
-}
 
+}
