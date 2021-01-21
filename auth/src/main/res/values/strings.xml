@@ -6,7 +6,7 @@
     <string name="zarinpal_auth_sdk_wrong_entered_email">ایمیل وارد شده اشتباه است.</string>
     <string name="zarinpal_auth_sdk_enter_email_or_phone_number">ایمیل یا شماره همراه وارد نمایید.</string>
     <string name="zarinpal_auth_sdk_resend_code_time">تا %s ارسال مجدد رمز‌یکبار مصرف به شما امکان پذیر است.</string>
-    <string name="zarinpal_auth_sdk__for_use_app_desc">برای استفاده از خدمات اپلیکیشن %s، شما می‌توانید وارد حساب کاربری زرین‌پال خود شوید.</string>
+    <string name="zarinpal_auth_sdk__for_use_app_desc">برای استفاده از خدمات می‌توانید وارد حساب کاربری خود شوید.</string>
     <string name="zarinpal_auth_sdk_phone_number_or_email">شماره‌همراه یا ایمیل</string>
     <string name="zarinpal_auth_sdk_accept_and_continue">تایید و ادامه</string>
     <string name="zarinpal_auth_sdk_otp_sent">رمز یک‌بار مصرف به %s ارسال شد.</string>

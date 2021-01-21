@@ -41,7 +41,7 @@ public class RequestBuilder {
     }
 
     public RequestBuilder setMessage(String message) {
-        if (message.length() > 100) {
+        if (message.length() > 60) {
             throw new IllegalArgumentException("message can't more than 100 character.");
         }
         this.message = message;

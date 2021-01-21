@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
-import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -19,7 +18,6 @@ import com.zarinpal.auth.view.register.RegistrationFragment
 import com.zarinpal.provider.core.ButtonProgress
 import com.zarinpal.provider.core.Font
 import com.zarinpal.provider.core.ViewPumper
-import com.zarinpal.provider.core.toTypeface
 
 internal class InitializerFragment : Fragment(R.layout.init_auth_fragment) {
 
@@ -27,25 +25,9 @@ internal class InitializerFragment : Fragment(R.layout.init_auth_fragment) {
         ViewPumper.pump(view, Font.Light)
         super.onViewCreated(view, savedInstanceState)
 
-        val appName = arguments?.getString("app_name")
-        val message = arguments?.getString("message")
-
-
         val edtUsername = view.findViewById<EditText>(R.id.edt_username)
         val btn = view.findViewById<ButtonProgress>(R.id.btn)
 
-        view.findViewById<AppCompatTextView>(R.id.txt_message).apply {
-            typeface = Font.Light.toTypeface(requireContext())
-            if (message != null) {
-                text = message
-                visibility = View.VISIBLE
-            }
-        }
-
-        view.findViewById<AppCompatTextView>(R.id.txt_welcome).apply {
-            typeface = Font.Bold.toTypeface(requireContext())
-            text = String.format(text.toString(), appName)
-        }
 
 
         btn.setOnClickListener {

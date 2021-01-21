@@ -9,19 +9,13 @@ import androidx.lifecycle.Observer
 import com.chaos.view.PinView
 import com.zarinpal.auth.Holder
 import com.zarinpal.auth.R
-import com.zarinpal.auth.controller.IssueTokenHttpClient
 import com.zarinpal.auth.midleware.IssueTokenMiddleware
-import com.zarinpal.auth.tools.newScope
 import com.zarinpal.auth.tools.runCountDownTimer
 import com.zarinpal.auth.tools.toToast
+import com.zarinpal.auth.view.AuthenticationFragment
 import com.zarinpal.provider.core.ButtonProgress
 import com.zarinpal.provider.core.Font
 import com.zarinpal.provider.core.ViewPumper
-import com.zarinpal.provider.core.toTypeface
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import org.json.JSONObject
 import java.util.concurrent.TimeUnit
 
@@ -36,10 +30,11 @@ internal class OtpFragment : Fragment(R.layout.otp_auth_fragment) {
 
 
         val pinView = view.findViewById<PinView>(R.id.pin_view)
-        view.findViewById<AppCompatTextView>(R.id.txt_message).apply {
-            text = String.format(text.toString(), username)
-            typeface = Font.Bold.toTypeface(requireContext())
-        }
+
+        (parentFragment as AuthenticationFragment).txtMessage.text =
+            String.format(getString(R.string.zarinpal_auth_sdk_otp_sent), username)
+
+
 
         view.findViewById<AppCompatTextView>(R.id.txt_time).apply {
             runCountDownTimer(
