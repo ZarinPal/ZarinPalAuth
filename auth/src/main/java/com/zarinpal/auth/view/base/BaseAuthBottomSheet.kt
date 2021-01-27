@@ -1,4 +1,4 @@
-package com.zarinpal.provider.view.bottomSheets
+package com.zarinpal.auth.view.base
 
 import android.os.Bundle
 import android.view.*
@@ -11,16 +11,17 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.zarinpal.auth.R
 import com.zarinpal.provider.core.Font
 import com.zarinpal.provider.core.ViewPumper
-import com.zarinpal.provider.view.IViewInflater
+import com.zarinpal.provider.view.IAuthViewInflater
+import com.zarinpal.provider.view.bottomSheets.IAuthBackPress
 
 
 /**
  * Created by ImanX.
  * Asghar | Copyrights 2019 ZarinPal Crop.
  */
-internal abstract class BaseBottomSheet : BottomSheetDialogFragment(),
-    IViewInflater,
-    IBackPress {
+internal abstract class BaseAuthBottomSheet : BottomSheetDialogFragment(),
+    IAuthViewInflater,
+    IAuthBackPress {
 
     private lateinit var progressBar: ProgressBar
     private lateinit var contentView: View

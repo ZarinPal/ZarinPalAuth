@@ -56,7 +56,7 @@ internal class OtpFragment : Fragment(R.layout.otp_auth_fragment) {
         view.findViewById<ButtonProgress>(R.id.btn).apply {
             setOnClickListener {
 
-                val otp = pinView.text.toString();
+                val otp = pinView.text.toString()
 
                 if (otp.isEmpty()) {
                     return@setOnClickListener

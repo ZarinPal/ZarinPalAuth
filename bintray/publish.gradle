@@ -9,6 +9,36 @@ def libraryArtifactId = 'auth'
 version = artifactVersion
 group = libraryGroupId
 
+install {
+    repositories.mavenInstaller {
+        pom {
+            project {
+                packaging 'aar'
+                name 'ZarinPal Auth SDK'
+                url 'https://zarinpal.com'
+                licenses {
+                    license {
+                        name 'The Apache Software License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id 'imanx'
+                        name 'Alireza Tarazani'
+                        email 'imannamix@gmail.com'
+                    }
+                }
+                scm {
+                    connection 'https://github.com/ZarinPal/ZarinPalAuth'
+                    url 'https://zarinpal.com'
+
+                }
+            }
+        }
+    }
+}
+
 
 task generateSourcesJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs
