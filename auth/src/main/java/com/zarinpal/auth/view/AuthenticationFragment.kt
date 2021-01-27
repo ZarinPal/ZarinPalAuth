@@ -10,10 +10,10 @@ import com.zarinpal.auth.view.login.InitializerFragment
 import com.zarinpal.provider.core.Font
 import com.zarinpal.provider.core.ViewPumper
 import com.zarinpal.provider.core.toTypeface
-import com.zarinpal.provider.view.bottomSheets.BaseBottomSheet
+import com.zarinpal.auth.view.base.BaseAuthBottomSheet
 
 
-internal class AuthenticationFragment : BaseBottomSheet() {
+internal class AuthenticationFragment : BaseAuthBottomSheet() {
 
     lateinit var txtMessage: AppCompatTextView
 

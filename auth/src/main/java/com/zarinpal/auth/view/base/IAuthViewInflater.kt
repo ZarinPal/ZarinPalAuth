@@ -8,7 +8,7 @@ import androidx.annotation.LayoutRes
  * Created by ImanX.
  * Asghar | Copyrights 2019 ZarinPal Crop.
  */
-interface IViewInflater {
+interface IAuthViewInflater {
     fun onCreateView(view: View)
     @LayoutRes
     fun getLayout(viewGroup: ViewGroup?): Int
