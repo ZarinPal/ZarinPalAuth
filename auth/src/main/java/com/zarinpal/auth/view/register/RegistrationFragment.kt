@@ -16,6 +16,8 @@ import com.zarinpal.provider.core.ButtonProgress
 import com.zarinpal.provider.core.Font
 import com.zarinpal.provider.core.ViewPumper
 
+
+@Deprecated("Registration is automated.")
 internal class RegistrationFragment : Fragment(R.layout.registration_auth_fragment) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -53,8 +55,7 @@ internal class RegistrationFragment : Fragment(R.layout.registration_auth_fragme
 
 
                 progressVisibility = true
-                RegistrationMiddleware(name, family, username!!)
-                    .asLiveData()
+                RegistrationMiddleware(name, family, username!!).asLiveData()
                     .observe(this@RegistrationFragment, Observer {
                         it.getOrElse {
                             it.toToast(requireContext()).show()

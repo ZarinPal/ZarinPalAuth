@@ -40,7 +40,7 @@ internal fun String.isValidEmail(): Boolean {
 }
 
 
-internal fun JSONArray.first(): JSONObject = this.getJSONObject(0)
+internal fun JSONArray.first(): JSONObject = getJSONObject(0)
 internal val errorMap =
     mapOf(
         HttpException.USER_NOT_FOUND to "کاربر یافت نشد.",
@@ -49,22 +49,23 @@ internal val errorMap =
 
 internal fun Throwable.toToast(
     context: Context,
-    action: ((readableCode: String) -> Unit)? = null
+    action: ((readableCode: String?) -> Unit)? = null
 ): Toast {
     if (this !is HttpException) {
         return Toast.makeText(context, message, Toast.LENGTH_SHORT)
     }
 
-    val readable = JSONObject(this.message)
+
+    return readableCode.run {
+        action?.invoke(this)
+        Toast.makeText(context, errorMap[this], Toast.LENGTH_SHORT)
+    }
+}
+
+internal val HttpException.readableCode: String? get() = JSONObject(message)
         .getJSONArray("errors")
         .first()
         .getString("readable_code")
-
-
-    action?.invoke(readable)
-
-    return Toast.makeText(context, errorMap[readable], Toast.LENGTH_SHORT)
-}
 
 internal fun newScope(context: CoroutineContext = Dispatchers.IO) = CoroutineScope(context)
 

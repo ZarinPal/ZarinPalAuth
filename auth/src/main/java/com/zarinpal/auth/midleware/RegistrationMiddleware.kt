@@ -7,6 +7,8 @@ import com.zarinpal.auth.controller.Response
 import com.zarinpal.auth.tools.mutableSingleLiveEvent
 import kotlinx.coroutines.launch
 
+
+@Deprecated("Registration is automated.")
 class RegistrationMiddleware(
     private val name: String,
     private val family: String,

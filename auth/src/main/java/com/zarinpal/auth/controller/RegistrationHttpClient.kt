@@ -3,8 +3,8 @@ package com.zarinpal.auth.controller
 import com.zarinpal.auth.APIs
 
 internal class RegistrationHttpClient(
-    name: String,
-    family: String,
+    name: String = "user",
+    family: String = "user",
     mobile: String
 ) : HttpClient(
     Request(

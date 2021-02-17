@@ -67,34 +67,24 @@ internal class InitializerFragment : Fragment(R.layout.init_auth_fragment) {
                     .asLiveData()
                     .observe(this@InitializerFragment, Observer {
 
-                    btn.progressVisibility = false
-                    val response = it.getOrElse {
-                        it.toToast(requireContext()) {
-                            if (it == HttpException.USER_NOT_FOUND) {
-                                requireFragmentManager()
-                                    .beginTransaction()
-                                    .replace(R.id.fragment, RegistrationFragment().apply {
-                                        arguments =
-                                            bundleOf("username" to edtUsername.text.toString())
-                                    })
-                                    .commitAllowingStateLoss()
-                            }
-                        }.show()
-                        Holder.callback?.onException(it)
-                        return@Observer
-                    }
+                        btn.progressVisibility = false
+                        val response = it.getOrElse {
+                            it.toToast(requireContext()).show()
+                            Holder.callback?.onException(it)
+                            return@Observer
+                        }
 
-                    requireFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.fragment, OtpFragment()
-                            .apply {
-                                arguments = bundleOf(
-                                    "username" to edtUsername.text.toString(),
-                                    "params" to response.body
-                                )
-                            }).commitAllowingStateLoss()
+                        requireFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.fragment, OtpFragment()
+                                .apply {
+                                    arguments = bundleOf(
+                                        "username" to edtUsername.text.toString(),
+                                        "params" to response.body
+                                    )
+                                }).commitAllowingStateLoss()
 
-                })
+                    })
 
             }
         }
