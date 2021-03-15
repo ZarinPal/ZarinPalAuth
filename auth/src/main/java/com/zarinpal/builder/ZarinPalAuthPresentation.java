@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 
 import com.zarinpal.ZarinPalAuth;
+import com.zarinpal.auth.Callback;
 import com.zarinpal.auth.Holder;
 
 public class ZarinPalAuthPresentation {
@@ -15,7 +16,7 @@ public class ZarinPalAuthPresentation {
         this.builder = requestBuilder;
     }
 
-    public void start(@NonNull ZarinPalAuth.Callback callback) {
+    public void start(@NonNull Callback callback) {
         Holder.INSTANCE.setCallback(callback);
         Holder.INSTANCE.setDrawable(builder.getIcon());
         Holder.INSTANCE.setAuthClient(builder.getAuthType().toSerialiaze());

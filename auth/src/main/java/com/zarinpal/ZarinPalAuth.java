@@ -20,10 +20,4 @@ public class ZarinPalAuth {
         }
     }
 
-
-    public interface Callback {
-        void onIssueAccessToken(String typeToken, String accessToken, String refreshToken, long expireIn);
-
-        void onException(Throwable throwable);
-    }
 }

@@ -4,11 +4,11 @@ import android.graphics.drawable.Drawable
 import com.zarinpal.ZarinPalAuth
 
 object Holder {
-    internal var callback: ZarinPalAuth.Callback? = null
+    internal var callback: Callback? = null
     internal var drawable: Drawable? = null
     internal var authClient: String? = null
 
-    fun setCallback(callback: ZarinPalAuth.Callback) {
+    fun setCallback(callback: Callback) {
         this.callback = callback
     }
 
