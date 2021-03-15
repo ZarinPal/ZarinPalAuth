@@ -1,6 +1,6 @@
 ext {
 
-    artifactVersion = "0.0.3-alpha1"
+    artifactVersion = "0.0.4-alpha1"
 
     library = [
             'appcompat'   : '1.2.0',
