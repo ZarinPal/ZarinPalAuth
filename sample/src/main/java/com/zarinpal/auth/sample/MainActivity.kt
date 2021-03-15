@@ -6,6 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.zarinpal.Request
 import com.zarinpal.ZarinPalAuth
 import com.zarinpal.auth.Callback
+import com.zarinpal.auth.tools.start
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 
 class MainActivity : AppCompatActivity() {
@@ -37,24 +40,25 @@ class MainActivity : AppCompatActivity() {
             })
 
 
-//        ZarinPalAuth.Builder(this,)
-//            .setMessage("آلودگی هوا و خشکی پوست دو عامل اصلی بیماری های پوستی می باشند.")
-//            .build()
-//            .start(object : ZarinPalAuth.Callback {
-//                override fun onIssueAccessToken(
-//                    typeToken: String?,
-//                    accessToken: String?,
-//                    refreshToken: String?,
-//                    expireIn: Long
-//                ) {
-//                    Log.i("TAG token", accessToken)
-//                }
-//
-//                override fun onException(throwable: Throwable?) {
-//
-//                }
-//
-//            })
+        //Use by Coroutine
+        GlobalScope.launch {
+            runCatching {
+                ZarinPalAuth.with(this@MainActivity)
+                    .byRequest(Request.asPasswordGrant(GRANT_TYPE, CLIENT_SECRET, CLIENT_ID, SCOPE))
+                    .asBottomSheet()
+                    .setMessage("Message")
+                    .make()
+                    .start()
+            }.getOrElse {
+                println(it.message)
+                return@launch
+            }.let {
+                println(it["accessToken"])
+            }
+
+        }
+
+
     }
 
 }
