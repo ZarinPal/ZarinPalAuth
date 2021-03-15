@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.zarinpal.Request
 import com.zarinpal.ZarinPalAuth
+import com.zarinpal.auth.Callback
 
 
 class MainActivity : AppCompatActivity() {
@@ -23,11 +24,11 @@ class MainActivity : AppCompatActivity() {
             .asBottomSheet()
             .setMessage("Message")
             .make()
-            .start(object : ZarinPalAuth.Callback {
+            .start(object : Callback {
                 override fun onIssueAccessToken(
                     typeToken: String?, accessToken: String?, refreshToken: String?, expireIn: Long
                 ) {
-                    Log.i("TAG", accessToken)
+                    println(accessToken)
                 }
 
                 override fun onException(throwable: Throwable?) {

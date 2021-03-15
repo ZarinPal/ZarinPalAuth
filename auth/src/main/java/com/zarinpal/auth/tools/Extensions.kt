@@ -1,15 +1,22 @@
 package com.zarinpal.auth.tools
 
 import android.content.Context
+import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Patterns
 import android.widget.Toast
+import androidx.core.os.bundleOf
+import com.zarinpal.ZarinPalAuth
+import com.zarinpal.auth.Callback
 import com.zarinpal.auth.exception.HttpException
+import com.zarinpal.builder.ZarinPalAuthPresentation
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.suspendCancellableCoroutine
 import org.json.JSONArray
 import org.json.JSONObject
 import kotlin.coroutines.CoroutineContext
+import kotlin.coroutines.resumeWithException
 
 internal fun runCountDownTimer(
     milliInFuture: Long,
@@ -62,7 +69,8 @@ internal fun Throwable.toToast(
     }
 }
 
-internal val HttpException.readableCode: String? get() = JSONObject(message)
+internal val HttpException.readableCode: String?
+    get() = JSONObject(message)
         .getJSONArray("errors")
         .first()
         .getString("readable_code")
@@ -71,5 +79,30 @@ internal fun newScope(context: CoroutineContext = Dispatchers.IO) = CoroutineSco
 
 internal fun <T> mutableSingleLiveEvent(block: SingleLiveEvent<T>.() -> Unit): SingleLiveEvent<T> {
     return SingleLiveEvent<T>().apply { block(this) }
+}
+
+suspend fun ZarinPalAuthPresentation.start(): Bundle {
+    return suspendCancellableCoroutine {
+        start(object : Callback {
+            override fun onIssueAccessToken(
+                typeToken: String?,
+                accessToken: String?,
+                refreshToken: String?,
+                expireIn: Long
+            ) {
+                bundleOf(
+                    "typeToken" to typeToken,
+                    "accessToken" to accessToken,
+                    "refreshToken" to refreshToken,
+                    "expireIn" to expireIn
+                ).apply { it.resumeWith(Result.success(this)) }
+            }
+
+            override fun onException(throwable: Throwable?) {
+                it.resumeWithException(throwable ?: Exception())
+            }
+
+        })
+    }
 }
 
